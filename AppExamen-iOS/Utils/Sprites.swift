@@ -29,10 +29,12 @@ extension UIImageView {
 
             if counter >= 10 {
                 timer.invalidate()
+
                 if let finalImage = UIImage(named: "dice\(finalValue)") {
                     self.image = finalImage
                 }
-                completion(finalValue)  // devuelve 1–6
+
+                completion(finalValue)
             }
         }
     }
