@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var diceImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var selectedCatagoryLabel: UILabel!
     @IBOutlet weak var quesitosView: UIStackView!
     @IBOutlet weak var rollDiceBtn: UIButton!
     @IBOutlet weak var playAgainBtn: UIButton!
@@ -29,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource,
         selectedCategory = getRandomCategory()
         selectedQuestion = getRandomQuestion(category: selectedCategory)
 
+        selectedCatagoryLabel.text = selectedCategory.rawValue
         questionLabel.text = selectedQuestion.question
 
         tableView.dataSource = self
@@ -43,6 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource,
         selectedCategory = getRandomCategory()
         selectedQuestion = getRandomQuestion(category: selectedCategory)
 
+        selectedCatagoryLabel.text = selectedCategory.rawValue
         questionLabel.text = selectedQuestion.question
 
         tableView.reloadData()
@@ -180,6 +183,8 @@ class ViewController: UIViewController, UITableViewDataSource,
 
         selectedCategory = getRandomCategory()
         selectedQuestion = getRandomQuestion(category: selectedCategory)
+
+        selectedCatagoryLabel.text = selectedCategory.rawValue
         questionLabel.text = selectedQuestion.question
 
         resetCellsColor()
