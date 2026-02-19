@@ -23,13 +23,13 @@
                                         <rect key="frame" x="138" y="0.0" width="117" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcR-6S-9B3">
-                                        <rect key="frame" x="144" y="174" width="106" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QX8-oT-8t1">
+                                        <rect key="frame" x="195" y="174" width="142" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Girar Dado"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Jugar de nuevo"/>
                                         <connections>
-                                            <action selector="rollDice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8xV-PN-iuB"/>
+                                            <action selector="playAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b91-px-vbq"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="94" estimatedRowHeight="94" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="HsW-I1-gcc">
@@ -44,7 +44,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="94"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trivial Answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WV1-Ce-qIf">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trivial Answer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WV1-Ce-qIf">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="94"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -59,12 +59,6 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QnX-u0-NUx">
-                                        <rect key="frame" x="8" y="107" width="377" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="rnc-nW-k1S"/>
-                                        </constraints>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="CHk-U0-CgV">
                                         <rect key="frame" x="1" y="222" width="393" height="93"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -72,6 +66,21 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QnX-u0-NUx">
+                                        <rect key="frame" x="8" y="107" width="377" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="rnc-nW-k1S"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcR-6S-9B3">
+                                        <rect key="frame" x="81" y="174" width="106" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Girar Dado"/>
+                                        <connections>
+                                            <action selector="rollDice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8xV-PN-iuB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -93,6 +102,7 @@
                     <navigationItem key="navigationItem" id="YGs-8l-o1D"/>
                     <connections>
                         <outlet property="diceImageView" destination="0D3-a1-zJj" id="ree-RQ-AmC"/>
+                        <outlet property="playAgainBtn" destination="QX8-oT-8t1" id="iYA-Sr-jGE"/>
                         <outlet property="quesitosView" destination="QnX-u0-NUx" id="9yI-Nf-sdX"/>
                         <outlet property="questionLabel" destination="CHk-U0-CgV" id="u5a-xT-cQH"/>
                         <outlet property="rollDiceBtn" destination="QcR-6S-9B3" id="KBT-sZ-fIQ"/>

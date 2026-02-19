@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var quesitosView: UIStackView!
     @IBOutlet weak var rollDiceBtn: UIButton!
+    @IBOutlet weak var playAgainBtn: UIButton!
 
     private var selectedCategory: TrivialCategory!
     private var selectedQuestion: TrivialQuestion!
@@ -25,8 +26,8 @@ class ViewController: UIViewController, UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedCategory = TRIVIAL_QUESTIONS.randomElement()!.key
-        selectedQuestion = TRIVIAL_QUESTIONS[selectedCategory]!.randomElement()!
+        selectedCategory = getRandomCategory()
+        selectedQuestion = getRandomQuestion(category: selectedCategory)
 
         questionLabel.text = selectedQuestion.question
 
@@ -35,15 +36,12 @@ class ViewController: UIViewController, UITableViewDataSource,
     }
 
     @IBAction func rollDice(_ sender: Any) {
-        selectedCellByUser.backgroundColor = .clear
-        if correctTableViewCell != nil {
-            correctTableViewCell!.backgroundColor = .clear
-        }
+        resetCellsColor()
 
         tableView.allowsSelection = true
 
-        selectedCategory = TRIVIAL_QUESTIONS.randomElement()!.key
-        selectedQuestion = TRIVIAL_QUESTIONS[selectedCategory]!.randomElement()!
+        selectedCategory = getRandomCategory()
+        selectedQuestion = getRandomQuestion(category: selectedCategory)
 
         questionLabel.text = selectedQuestion.question
 
@@ -84,12 +82,6 @@ class ViewController: UIViewController, UITableViewDataSource,
     ) {
         tableView.allowsSelection = false
 
-        if win() {
-            rollDiceBtn.isEnabled = false
-            showWinAlert()
-            return
-        }
-
         let userAnswer = selectedQuestion.answers[indexPath.row]
 
         guard let cell = tableView.cellForRow(at: indexPath) else {
@@ -105,6 +97,13 @@ class ViewController: UIViewController, UITableViewDataSource,
             let (inserted, _) = correctCategories.insert(selectedCategory)
 
             if inserted {
+                if win() {
+                    rollDiceBtn.isEnabled = false
+                    playAgainBtn.isEnabled = true
+                    showWinAlert()
+                    return
+                }
+
                 let piePiece = createPiePiece(
                     color: selectedCategory.getColor()
                 )
@@ -170,5 +169,39 @@ class ViewController: UIViewController, UITableViewDataSource,
         )
 
         present(alert, animated: true, completion: nil)
+    }
+
+    @IBAction func playAgain(_ sender: Any) {
+        correctCategories.removeAll()
+
+        quesitosView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+
+        selectedCategory = getRandomCategory()
+        selectedQuestion = getRandomQuestion(category: selectedCategory)
+        questionLabel.text = selectedQuestion.question
+
+        resetCellsColor()
+        tableView.reloadData()
+
+        rollDiceBtn.isEnabled = true
+        playAgainBtn.isEnabled = false
+    }
+
+    func getRandomQuestion(category: TrivialCategory) -> TrivialQuestion {
+        return TRIVIAL_QUESTIONS[category]!.randomElement()!
+    }
+
+    func getRandomCategory() -> TrivialCategory {
+        return TRIVIAL_QUESTIONS.randomElement()!.key
+    }
+
+    func resetCellsColor() {
+        selectedCellByUser.backgroundColor = .clear
+
+        if correctTableViewCell != nil {
+            correctTableViewCell!.backgroundColor = .clear
+        }
     }
 }
