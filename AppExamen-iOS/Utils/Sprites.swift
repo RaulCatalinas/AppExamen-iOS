@@ -13,18 +13,26 @@ extension UIImageView {
         let finalValue = Int.random(in: 1...6)
         var counter = 0
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) {
-            timer in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
 
             let randomValue = Int.random(in: 1...6)
-            self.image = UIImage(named: "dice\(randomValue)")
+
+            guard let image = UIImage(named: "dice_sprites/dice\(randomValue)")
+            else {
+                print("⚠️ Imagen dice_sprites/dice\(randomValue) no encontrada")
+                return
+            }
+
+            self.image = image
 
             counter += 1
 
             if counter >= 10 {
                 timer.invalidate()
-                self.image = UIImage(named: "dice\(finalValue)")
-                completion(finalValue - 1)
+                if let finalImage = UIImage(named: "dice\(finalValue)") {
+                    self.image = finalImage
+                }
+                completion(finalValue)  // devuelve 1–6
             }
         }
     }

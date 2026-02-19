@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource,
 
     private var selectedCategory: TrivialCategory!
     private var selectedQuestion: TrivialQuestion!
-    private var selectedCellByUser: UITableViewCell!
+    private var selectedCellByUser: UITableViewCell? = nil
     private var correctTableViewCell: UITableViewCell? = nil
     private var correctCategories: Set<TrivialCategory> = []
 
@@ -38,25 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource,
     }
 
     @IBAction func rollDice(_ sender: Any) {
-        resetCellsColor()
-
-        tableView.allowsSelection = true
-
-        selectedCategory = getRandomCategory()
-        selectedQuestion = getRandomQuestion(category: selectedCategory)
-
-        selectedCatagoryLabel.text = selectedCategory.rawValue
-        questionLabel.text = selectedQuestion.question
-
-        tableView.reloadData()
-
-        /*diceImageView.rollDice { [self] result in
-            let selectedCategory = TrivialCategory.allCases[result]
-        
-            selectedQuestion = TRIVIAL_QUESTIONS[selectedCategory]?.randomElement()
-        
-            tableView.reloadData()
-        }*/
+        rollDice()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
@@ -181,14 +163,7 @@ class ViewController: UIViewController, UITableViewDataSource,
             $0.removeFromSuperview()
         }
 
-        selectedCategory = getRandomCategory()
-        selectedQuestion = getRandomQuestion(category: selectedCategory)
-
-        selectedCatagoryLabel.text = selectedCategory.rawValue
-        questionLabel.text = selectedQuestion.question
-
-        resetCellsColor()
-        tableView.reloadData()
+        rollDice()
 
         rollDiceBtn.isEnabled = true
         playAgainBtn.isEnabled = false
@@ -203,10 +178,28 @@ class ViewController: UIViewController, UITableViewDataSource,
     }
 
     func resetCellsColor() {
-        selectedCellByUser.backgroundColor = .clear
+        if selectedCellByUser != nil {
+            selectedCellByUser!.backgroundColor = .clear
+        }
 
         if correctTableViewCell != nil {
             correctTableViewCell!.backgroundColor = .clear
+        }
+    }
+
+    private func rollDice() {
+        diceImageView.rollDice { [self] result in
+            resetCellsColor()
+
+            tableView.allowsSelection = true
+
+            selectedCategory = getRandomCategory()
+            selectedQuestion = getRandomQuestion(category: selectedCategory)
+
+            selectedCatagoryLabel.text = selectedCategory.rawValue
+            questionLabel.text = selectedQuestion.question
+
+            tableView.reloadData()
         }
     }
 }

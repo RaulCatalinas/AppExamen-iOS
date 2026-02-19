@@ -19,7 +19,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RSd-AI-MMK" userLabel="Safe Area View">
                                 <rect key="frame" x="0.0" y="172" width="393" height="612"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dice/dice1" translatesAutoresizingMaskIntoConstraints="NO" id="0D3-a1-zJj">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dice_sprites/dice1" translatesAutoresizingMaskIntoConstraints="NO" id="0D3-a1-zJj">
                                         <rect key="frame" x="138" y="0.0" width="117" height="99"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -141,7 +141,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dice/dice1" width="500" height="500"/>
+        <image name="dice_sprites/dice1" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
