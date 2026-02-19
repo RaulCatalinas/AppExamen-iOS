@@ -13,16 +13,20 @@ class ViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var diceImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var quesitosView: UIStackView!
+    @IBOutlet weak var rollDiceBtn: UIButton!
 
+    private var selectedCategory: TrivialCategory!
     private var selectedQuestion: TrivialQuestion!
     private var selectedCellByUser: UITableViewCell!
     private var correctTableViewCell: UITableViewCell? = nil
+    private var correctCategories: Set<TrivialCategory> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedQuestion = TRIVIAL_QUESTIONS.randomElement()!.value
-            .randomElement()!
+        selectedCategory = TRIVIAL_QUESTIONS.randomElement()!.key
+        selectedQuestion = TRIVIAL_QUESTIONS[selectedCategory]!.randomElement()!
 
         questionLabel.text = selectedQuestion.question
 
@@ -38,8 +42,8 @@ class ViewController: UIViewController, UITableViewDataSource,
 
         tableView.allowsSelection = true
 
-        selectedQuestion = TRIVIAL_QUESTIONS.randomElement()!.value
-            .randomElement()!
+        selectedCategory = TRIVIAL_QUESTIONS.randomElement()!.key
+        selectedQuestion = TRIVIAL_QUESTIONS[selectedCategory]!.randomElement()!
 
         questionLabel.text = selectedQuestion.question
 
@@ -80,6 +84,12 @@ class ViewController: UIViewController, UITableViewDataSource,
     ) {
         tableView.allowsSelection = false
 
+        if win() {
+            rollDiceBtn.isEnabled = false
+            showWinAlert()
+            return
+        }
+
         let userAnswer = selectedQuestion.answers[indexPath.row]
 
         guard let cell = tableView.cellForRow(at: indexPath) else {
@@ -91,13 +101,16 @@ class ViewController: UIViewController, UITableViewDataSource,
 
         if userAnswer.isCorrect {
             cell.backgroundColor = .systemGreen
-            
-            let quiesito = UIView(frame: CGRect(x: cell.frame.width - 40, y: 10, width: 30, height: 30))
 
-            quiesito.backgroundColor = .yellow
-            quiesito.layer.cornerRadius = 15  // redondo
-            quiesito.layer.borderWidth = 1
-            quiesito.layer.borderColor = UIColor.orange.cgColor
+            let (inserted, _) = correctCategories.insert(selectedCategory)
+
+            if inserted {
+                let piePiece = createPiePiece(
+                    color: selectedCategory.getColor()
+                )
+
+                quesitosView.addArrangedSubview(piePiece)
+            }
 
             return
         }
@@ -123,4 +136,39 @@ class ViewController: UIViewController, UITableViewDataSource,
 
     }
 
+    func createPiePiece(color: UIColor) -> UIView {
+        let piePiece = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 30,
+                height: 30
+            )
+        )
+
+        piePiece.backgroundColor = color
+        piePiece.layer.cornerRadius = 15
+        piePiece.layer.borderWidth = 1
+        piePiece.layer.borderColor = UIColor.label.cgColor
+
+        return piePiece
+    }
+
+    func win() -> Bool {
+        return correctCategories.count == 6
+    }
+
+    func showWinAlert() {
+        let alert = UIAlertController(
+            title: "¡Has ganado!",
+            message: "¡Felicidades por superar el juego!",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: nil)
+        )
+
+        present(alert, animated: true, completion: nil)
+    }
 }

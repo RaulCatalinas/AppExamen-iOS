@@ -384,10 +384,7 @@ let TRIVIAL_QUESTIONS: TrivialQuestions = [
         TrivialQuestion(
             question: "¿Cuántas válvulas tiene un corazón humano?",
             answers: [
-                TrivialAnswer(
-                    text: "Cuatro: mitral, tricúspide, aórtica y pulmonar",
-                    isCorrect: true
-                ),
+                TrivialAnswer(text: "Cuatro", isCorrect: true),
                 TrivialAnswer(text: "Tres", isCorrect: false),
                 TrivialAnswer(text: "Cinco", isCorrect: false),
                 TrivialAnswer(text: "Seis", isCorrect: false),
