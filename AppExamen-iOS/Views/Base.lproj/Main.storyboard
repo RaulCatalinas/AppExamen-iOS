@@ -109,8 +109,8 @@
                     <navigationItem key="navigationItem" id="YGs-8l-o1D"/>
                     <connections>
                         <outlet property="diceImageView" destination="0D3-a1-zJj" id="ree-RQ-AmC"/>
+                        <outlet property="piePieceView" destination="QnX-u0-NUx" id="9yI-Nf-sdX"/>
                         <outlet property="playAgainBtn" destination="QX8-oT-8t1" id="iYA-Sr-jGE"/>
-                        <outlet property="quesitosView" destination="QnX-u0-NUx" id="9yI-Nf-sdX"/>
                         <outlet property="questionLabel" destination="CHk-U0-CgV" id="u5a-xT-cQH"/>
                         <outlet property="rollDiceBtn" destination="QcR-6S-9B3" id="KBT-sZ-fIQ"/>
                         <outlet property="selectedCatagoryLabel" destination="8sT-Ag-arC" id="4pC-K3-2Oo"/>

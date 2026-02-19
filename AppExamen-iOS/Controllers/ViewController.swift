@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var selectedCatagoryLabel: UILabel!
-    @IBOutlet weak var quesitosView: UIStackView!
+    @IBOutlet weak var piePieceView: UIStackView!
     @IBOutlet weak var rollDiceBtn: UIButton!
     @IBOutlet weak var playAgainBtn: UIButton!
 
@@ -93,7 +93,7 @@ class ViewController: UIViewController, UITableViewDataSource,
                     color: selectedCategory.getColor()
                 )
 
-                quesitosView.addArrangedSubview(piePiece)
+                piePieceView.addArrangedSubview(piePiece)
             }
 
             return
@@ -159,7 +159,7 @@ class ViewController: UIViewController, UITableViewDataSource,
     @IBAction func playAgain(_ sender: Any) {
         correctCategories.removeAll()
 
-        quesitosView.arrangedSubviews.forEach {
+        piePieceView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
 
